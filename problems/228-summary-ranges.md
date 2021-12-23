@@ -1,0 +1,160 @@
+﻿# 228. summary-ranges | 汇总区间
+
+## Question description
+
+<!--If you want to use the English description, use <p>You are given a <strong>sorted unique</strong> integer array <code>nums</code>.</p>
+
+<p>Return <em>the <strong>smallest sorted</strong> list of ranges that <strong>cover all the numbers in the array exactly</strong></em>. That is, each element of <code>nums</code> is covered by exactly one of the ranges, and there is no integer <code>x</code> such that <code>x</code> is in one of the ranges but not in <code>nums</code>.</p>
+
+<p>Each range <code>[a,b]</code> in the list should be output as:</p>
+
+<ul>
+	<li><code>&quot;a-&gt;b&quot;</code> if <code>a != b</code></li>
+	<li><code>&quot;a&quot;</code> if <code>a == b</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [0,1,2,4,5,7]
+<strong>Output:</strong> [&quot;0-&gt;2&quot;,&quot;4-&gt;5&quot;,&quot;7&quot;]
+<strong>Explanation:</strong> The ranges are:
+[0,2] --&gt; &quot;0-&gt;2&quot;
+[4,5] --&gt; &quot;4-&gt;5&quot;
+[7,7] --&gt; &quot;7&quot;
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [0,2,3,4,6,8,9]
+<strong>Output:</strong> [&quot;0&quot;,&quot;2-&gt;4&quot;,&quot;6&quot;,&quot;8-&gt;9&quot;]
+<strong>Explanation:</strong> The ranges are:
+[0,0] --&gt; &quot;0&quot;
+[2,4] --&gt; &quot;2-&gt;4&quot;
+[6,6] --&gt; &quot;6&quot;
+[8,9] --&gt; &quot;8-&gt;9&quot;
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= nums.length &lt;= 20</code></li>
+	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
+	<li>All the values of <code>nums</code> are <strong>unique</strong>.</li>
+	<li><code>nums</code> is sorted in ascending order.</li>
+</ul>
+ instead-->
+<p>给定一个无重复元素的有序整数数组 <code>nums</code> 。</p>
+
+<p>返回 <strong>恰好覆盖数组中所有数字</strong> 的 <strong>最小有序</strong> 区间范围列表。也就是说，<code>nums</code> 的每个元素都恰好被某个区间范围所覆盖，并且不存在属于某个范围但不属于 <code>nums</code> 的数字 <code>x</code> 。</p>
+
+<p>列表中的每个区间范围 <code>[a,b]</code> 应该按如下格式输出：</p>
+
+<ul>
+	<li><code>"a->b"</code> ，如果 <code>a != b</code></li>
+	<li><code>"a"</code> ，如果 <code>a == b</code></li>
+</ul>
+
+<p> </p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [0,1,2,4,5,7]
+<strong>输出：</strong>["0->2","4->5","7"]
+<strong>解释：</strong>区间范围是：
+[0,2] --> "0->2"
+[4,5] --> "4->5"
+[7,7] --> "7"
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [0,2,3,4,6,8,9]
+<strong>输出：</strong>["0","2->4","6","8->9"]
+<strong>解释：</strong>区间范围是：
+[0,0] --> "0"
+[2,4] --> "2->4"
+[6,6] --> "6"
+[8,9] --> "8->9"
+</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = []
+<strong>输出：</strong>[]
+</pre>
+
+<p><strong>示例 4：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [-1]
+<strong>输出：</strong>["-1"]
+</pre>
+
+<p><strong>示例 5：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [0]
+<strong>输出：</strong>["0"]
+</pre>
+
+<p> </p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+	<li><code>0 <= nums.length <= 20</code></li>
+	<li><code>-2<sup>31</sup> <= nums[i] <= 2<sup>31</sup> - 1</code></li>
+	<li><code>nums</code> 中的所有值都 <strong>互不相同</strong></li>
+	<li><code>nums</code> 按升序排列</li>
+</ul>
+
+
+
+
+## Solution
+
+Language: **java**  /  Runtime: 0 ms
+
+```java
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> ret = new ArrayList<String>();
+        int i = 0;
+        int n = nums.length;
+        while (i < n) {
+            int low = i;
+            i++;
+            while (i < n && nums[i] == nums[i - 1] + 1) {
+                i++;
+            }
+            int high = i - 1;
+            StringBuffer temp = new StringBuffer(Integer.toString(nums[low]));
+            if (low < high) {
+                temp.append("->");
+                temp.append(Integer.toString(nums[high]));
+            }
+            ret.add(temp.toString());
+        }
+        return ret;
+    }
+}
+
+
+```
+
+
+
+## Related Links
+
+Question: [LeetCode](https://leetcode.com/problems/summary-ranges/description/)  /  [LeetCode中国](https://leetcode-cn.com/problems/summary-ranges/description/)
+
+Solution: [LeetCode](https://leetcode.com/articles/summary-ranges/)  /  [LeetCode中国](https://leetcode-cn.com/articles/summary-ranges/)
+
+[回到目录](../README.md)

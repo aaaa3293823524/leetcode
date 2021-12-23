@@ -1,0 +1,95 @@
+﻿# 剑指 Offer II 012. tvdfij | 左右两边子数组的和相等
+
+## Question description
+
+<!--If you want to use the English description, use <p>English description is not available for the problem. Please switch to Chinese.</p>
+ instead-->
+<p>给你一个整数数组&nbsp;<code>nums</code> ，请计算数组的 <strong>中心下标 </strong>。</p>
+
+<p>数组<strong> 中心下标</strong><strong> </strong>是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+
+<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
+
+<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [1,7,3,6,5,6]
+<strong>输出：</strong>3
+<strong>解释：</strong>
+中心下标是 3 。
+左侧数之和 sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 ，
+右侧数之和 sum = nums[4] + nums[5] = 5 + 6 = 11 ，二者相等。
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [1, 2, 3]
+<strong>输出：</strong>-1
+<strong>解释：</strong>
+数组中不存在满足此条件的中心下标。</pre>
+
+<p><strong>示例 3：</strong></p>
+
+<pre>
+<strong>输入：</strong>nums = [2, 1, -1]
+<strong>输出：</strong>0
+<strong>解释：</strong>
+中心下标是 0 。
+左侧数之和 sum = 0 ，（下标 0 左侧不存在元素），
+右侧数之和 sum = nums[1] + nums[2] = 1 + -1 = 0 。</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><meta charset="UTF-8" />注意：本题与主站 724&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/find-pivot-index/">https://leetcode-cn.com/problems/find-pivot-index/</a></p>
+
+
+
+
+## Solution
+
+Language: **java**  /  Runtime: 332 ms
+
+```java
+class Solution {
+    public int pivotIndex(int[] nums) {
+        if(nums==null||nums.length==0)return -1;
+        int sum[]=new int[nums.length];
+        int t=0;
+        for(int i=0;i<nums.length;i++) {
+            t+=nums[i];
+            sum[i]=t;
+            System.out.println("sum:"+i+"= "+sum[i]);
+        }
+        if(sum[nums.length-1]-nums[0]==0)return 0;
+        for(int i=1;i<nums.length;i++) {
+            System.out.println(i);
+            if((sum[nums.length-1]-sum[i-1]*2-nums[i])==0)return i;
+        }
+        return -1;
+    }
+}
+```
+
+
+
+## Related Links
+
+Question: [LeetCode](https://leetcode.com/problems/tvdfij/description/)  /  [LeetCode中国](https://leetcode-cn.com/problems/tvdfij/description/)
+
+Solution: [LeetCode](https://leetcode.com/articles/tvdfij/)  /  [LeetCode中国](https://leetcode-cn.com/articles/tvdfij/)
+
+[回到目录](../README.md)

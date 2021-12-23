@@ -1,0 +1,103 @@
+﻿# 剑指 Offer II 046. WNC0Lk | 二叉树的右侧视图
+
+## Question description
+
+<!--If you want to use the English description, use <p>English description is not available for the problem. Please switch to Chinese.</p>
+ instead-->
+<p>给定一个二叉树的 <strong>根节点</strong> <code>root</code>，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2021/02/14/tree.jpg" style="width: 270px; " /></p>
+
+<pre>
+<strong>输入:</strong>&nbsp;[1,2,3,null,5,null,4]
+<strong>输出:</strong>&nbsp;[1,3,4]
+</pre>
+
+<p><strong>示例 2:</strong></p>
+
+<pre>
+<strong>输入:</strong>&nbsp;[1,null,3]
+<strong>输出:</strong>&nbsp;[1,3]
+</pre>
+
+<p><strong>示例 3:</strong></p>
+
+<pre>
+<strong>输入:</strong>&nbsp;[]
+<strong>输出:</strong>&nbsp;[]
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示:</strong></p>
+
+<ul>
+	<li>二叉树的节点个数的范围是 <code>[0,100]</code></li>
+	<li><meta charset="UTF-8" /><code>-100&nbsp;&lt;= Node.val &lt;= 100</code>&nbsp;</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><meta charset="UTF-8" />注意：本题与主站 199&nbsp;题相同：<a href="https://leetcode-cn.com/problems/binary-tree-right-side-view/">https://leetcode-cn.com/problems/binary-tree-right-side-view/</a></p>
+
+
+
+
+## Solution
+
+Language: **java**  /  Runtime: 1 ms
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer>list=new ArrayList<Integer>();
+        if(root==null)return list;
+        Queue<TreeNode>queue=new LinkedList<TreeNode>();
+        TreeNode p=root;
+        queue.offer(root);
+        int t=root.val;
+        while(!queue.isEmpty()) {
+            int size=queue.size();
+            //int maxSum=Integer.MIN_VALUE;
+            for(int i=0;i<size;i++) {
+                TreeNode q=queue.poll();
+                //maxSum=Math.max(maxSum, q.val);
+                t=q.val;
+                if(q.left!=null)queue.offer(q.left);
+                if(q.right!=null)queue.offer(q.right);
+            }
+            list.add(t);
+        }
+        return list;
+    }
+}
+```
+
+
+
+## Related Links
+
+Question: [LeetCode](https://leetcode.com/problems/WNC0Lk/description/)  /  [LeetCode中国](https://leetcode-cn.com/problems/WNC0Lk/description/)
+
+Solution: [LeetCode](https://leetcode.com/articles/WNC0Lk/)  /  [LeetCode中国](https://leetcode-cn.com/articles/WNC0Lk/)
+
+[回到目录](../README.md)
